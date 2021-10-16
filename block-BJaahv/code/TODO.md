@@ -34,18 +34,19 @@ function createUser(name, id, noOfProjects) {
   user.id = id;
   user.noOfProjects = noOfProjects;
   user.getProjects = function getProjects() {
-    return noOfProjects;
-  };
-  user.changeName = function changeName(newName) {
-    user.name = name;
-    return user.name;
-  };
-  user.incrementProject = function incrementProject(value) {
-    user.noOfProjects = user.noOfProjects + 1;
     return user.noOfProjects;
   };
-  user.decrementProject = function decrementProject(value) {
-    user.noOfProjects = user.noOfProjects - 1;
+  user.changeName = function changeName(newName) {
+    let prevName = user.name;
+    user.name = newName;
+    return prevName;
+  };
+  user.incrementProject = function incrementProject() {
+    user.noOfProjects += 1;
+    return user.noOfProjects;
+  };
+  user.decrementProject = function decrementProject() {
+    user.noOfProjects -= 1;
     return user.noOfProjects;
   };
   return user;
@@ -56,28 +57,29 @@ let question1 = createUser("Hayley", 8007, 12);
 // Using Object.create (prototypal pattern)
 
 function createUser(name, id, noOfProjects) {
-  let user = Object.create(createUser.prototype);
+  let user = Object.create(userMethods);
   user.name = name;
   user.id = id;
   user.noOfProjects = noOfProjects;
   return user;
 }
 
-createUser.prototype = {
+let userMethods = {
   getProjects() {
-    return noOfProjects;
+    return this.noOfProjects;
   },
   changeName(newName) {
-    user.name = name;
-    return user.name;
+   let prevName = this.name;
+    this.name = newName;
+    return prevName;
   },
-  incrementProject(value) {
-    user.noOfProjects = user.noOfProjects + 1;
-    return user.noOfProjects;
+  incrementProject() {
+    this.noOfProjects += 1;
+    return this.noOfProjects;
   },
-  decrementProject(value) {
-    user.noOfProjects = user.noOfProjects - 1;
-    return user.noOfProjects;
+  decrementProject() {
+     this.noOfProjects -= 1;
+    return this.noOfProjects;
   },
 };
 
@@ -93,19 +95,20 @@ function CreateUser(name, id, noOfProjects) {
 
 CreateUser.prototype = {
   getProjects() {
-    return noOfProjects;
+    return this.noOfProjects;
   },
   changeName(newName) {
-    user.name = name;
-    return user.name;
+    let prevName = this.name;
+   this.name = newName;
+    return prevName;
   },
-  incrementProject(value) {
-    user.noOfProjects = user.noOfProjects + 1;
-    return user.noOfProjects;
+  incrementProject() {
+     this.noOfProjects += 1;
+    return this.noOfProjects;
   },
-  decrementProject(value) {
-    user.noOfProjects = user.noOfProjects - 1;
-    return user.noOfProjects;
+  decrementProject() {
+    this.noOfProjects -= 1;
+    return this.noOfProjects;
   },
 };
 
@@ -120,18 +123,19 @@ class User {
     this.noOfProjects = noOfProjects;
   }
   getProjects() {
-    return noOfProjects;
+    return this.noOfProjects;
   }
   changeName(newName) {
-    this.name = name;
-    return this.name;
+    let prevName = this.name;
+    this.name = newName;
+    return prevName;
   }
   incrementProject(value) {
-    this.noOfProjects = this.noOfProjects + 1;
+    this.noOfProjects += 1;
     return this.noOfProjects;
   }
   decrementProject(value) {
-    this.noOfProjects = this.noOfProjects - 1;
+     this.noOfProjects -= 1;
     return this.noOfProjects;
   }
 }
