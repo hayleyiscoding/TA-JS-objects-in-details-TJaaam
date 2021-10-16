@@ -24,8 +24,83 @@ For each different ways of creating object write different solutions.
 
 ```js
 const testData = {
-  title: 'Where is the capital of Jordan',
-  options: ['Tashkent', 'Amaan', 'Kuwait City', 'Nairobi'],
+  title: "Where is the capital of Jordan",
+  options: ["Tashkent", "Amaan", "Kuwait City", "Nairobi"],
   correctAnswerIndex: 1,
 };
+```
+
+```js
+
+// without Object
+
+let title = testData.title;
+let options = testData.options;
+let correctAnswerIndex = testData.options[1];
+function isAnswerCorrect(num) {
+  if (num === correctAnswerIndex){
+return true;
+  } else {
+    return false;
+  }
+}
+function getCorrectAnswer(correctAnswerIndex) {
+  testData.options[correctAnswerIndex];
+}
+
+// with Object
+
+let singleQuestion = {
+  title: "",
+  options: [],
+  correctAnswerIndex: i,
+  getCorrectAnswer: function getCorrectAnswer() {
+    return testData.options[correctAnswerIndex];
+    },
+  isAnswerCorrect: function isAnswerCorrect(num) {
+  if (num === correctAnswerIndex){
+return true;
+  } else {
+    return false;
+  }
+}
+
+// Use a function to create the object
+
+function createQuestion(title, options) {
+  let singleQuestion = {};
+  singleQuestion.title = title;
+  singleQuestion.options = options;
+  singleQuestion.getCorrectAnswer = function() {
+    return testData.options[correctAnswerIndex];
+  };
+  singleQuestion.isAnswerCorrect = function (num) {
+  if (num === correctAnswerIndex){
+    return true;
+    } else {
+    return false;
+    }
+  }
+  return singleQuestion;
+}
+
+// Convert the function the 'this keyword':
+
+function createQuestion(title, options) {
+  let singleQuestion = {};
+  this.title = title;
+  this.options = options;
+  this.getCorrectAnswer = function() {
+    return this.options[correctAnswerIndex];
+  };
+ this.isAnswerCorrect = function(num) {
+  if (num === correctAnswerIndex){
+    return true;
+    } else {
+    return false;
+    }
+ }
+  return singleQuestion;
+}
+
 ```
