@@ -23,13 +23,102 @@ You can use the data given below. You will also have to change the name of the f
 
 ```js
 let firstQuestion = new Question(
-  'Where is the capital of Jordan',
-  ['Tashkent', 'Amaan', 'Kuwait City', 'Nairobi'],
+  "Where is the capital of Jordan",
+  ["Tashkent", "Amaan", "Kuwait City", "Nairobi"],
   1
 );
 let secondQuestion = new Question(
-  'Where is the capital of Jamaica',
-  ['Tashkent', 'Amaan', 'Kingston', 'Nairobi'],
+  "Where is the capital of Jamaica",
+  ["Tashkent", "Amaan", "Kingston", "Nairobi"],
   2
 );
+```
+
+```js
+// Object
+
+let question = {
+  title: "What's your name?",
+  options: ["Jane", "John", "Jim"],
+  correctAnswerIndex: 1,
+  isAnswerCorrect(index) {
+    return index === currentAnswerindex;
+  },
+  getCorrectAnswer() {
+    return options[correctAnswerIndex];
+  },
+};
+
+// Prototypal Pattern
+
+let questionMethods = {
+  isAnswerCorrect(index) {
+    return index === this.correctAnswerIndex;
+  },
+  getCorrectAnswer() {
+    return this.options[this.correctAnswerIndex];
+  },
+}
+
+function createQuestion(title, options, correctAnswerIndex){
+  let question = Object.create(questionMethods);
+  question.title = title;
+  question.options = options;
+  question.correctAnswerIndex = correctAnswerIndex;
+  return question; 
+}
+
+let question1 = createQuestion ("Where is the capital of Jordan",
+  ["Tashkent", "Amaan", "Kuwait City", "Nairobi"],
+  1);
+
+let question2 = createQuestion ("Where is the capital of Jamaica",
+  ["Tashkent", "Amaan", "Kingston", "Nairobi"],
+  2)
+
+// Pseudoclassical Pattern
+
+function CreateQuestion(title, options, correctAnswerIndex){
+  this.title = title;
+  this.options = options;
+  this.correctAnswerIndex = correctAnswerIndex;
+}
+
+CreateQuestion.prototype = {
+  isAnswerCorrect(index) {
+    return index === this.correctAnswerIndex;
+  },
+  getCorrectAnswer() {
+    return this.options[this.correctAnswerIndex];
+  },
+}
+
+let question1 = new CreateQuestion ("Where is the capital of Jordan",
+  ["Tashkent", "Amaan", "Kuwait City", "Nairobi"],
+  1);
+
+let question2 = new CreateQuestion ("Where is the capital of Jamaica",
+  ["Tashkent", "Amaan", "Kingston", "Nairobi"],
+  2)
+
+// Class
+
+class Question {
+  constructor(title, options, correctAnswerIndex){
+    this.title = title;
+    this.options = options;
+    this.correctAnswerIndex = correctAnswerIndex;
+  }
+   isAnswerCorrect(index) {
+    return index === this.correctAnswerIndex;
+  }
+  getCorrectAnswer() {
+    return this.options[this.correctAnswerIndex];
+  }
+}
+
+let question1 = new Question ("Where is the capital of Jordan",
+  ["Tashkent", "Amaan", "Kuwait City", "Nairobi"],
+  1);
+
 ```
