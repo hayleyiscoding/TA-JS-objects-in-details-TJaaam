@@ -34,73 +34,64 @@ const testData = {
 
 // without Object
 
-let title = testData.title;
-let options = testData.options;
-let correctAnswerIndex = testData.options[1];
-function isAnswerCorrect(num) {
-  if (num === correctAnswerIndex){
-return true;
-  } else {
-    return false;
-  }
+let title = "Where is the capital of Jordan?";
+let options = ["Tashkent", "Amaan", "Kuwait City", "Nairobi"];
+let correctAnswerIndex = 1;
+function isAnswerCorrect(index) {
+  return index === correctAnswerIndex;
 }
-function getCorrectAnswer(correctAnswerIndex) {
-  testData.options[correctAnswerIndex];
+function getCorrectAnswer() {
+  return options[correctAnswerIndex];
 }
 
 // with Object
 
-let singleQuestion = {
-  title: "",
-  options: [],
-  correctAnswerIndex: i,
-  getCorrectAnswer: function getCorrectAnswer() {
-    return testData.options[correctAnswerIndex];
-    },
-  isAnswerCorrect: function isAnswerCorrect(num) {
-  if (num === correctAnswerIndex){
-return true;
-  } else {
-    return false;
-  }
+let question = {
+  title: "Where is the capital of Jordan?",
+  options: ["Tashkent", "Amaan", "Kuwait City", "Nairobi"],
+  correctAnswerIndex: 1,
+  isAnswerCorrect(index) {
+  return index === question.correctAnswerIndex;
+  },
+  getCorrectAnswer() {
+  return question.options[question.correctAnswerIndex];
+  },
 }
 
 // Use a function to create the object
 
-function createQuestion(title, options) {
-  let singleQuestion = {};
-  singleQuestion.title = title;
-  singleQuestion.options = options;
-  singleQuestion.getCorrectAnswer = function() {
-    return testData.options[correctAnswerIndex];
+function createQuestion(title, options, correctAnswerIndex) {
+  let question = {};
+  question.title = title;
+  question.options = options;
+  question.correctAnswerIndex = correctAnswerIndex;
+  question.getCorrectAnswer = function() {
+    return question.options[question.correctAnswerIndex];
   };
-  singleQuestion.isAnswerCorrect = function (num) {
-  if (num === correctAnswerIndex){
-    return true;
-    } else {
-    return false;
-    }
-  }
-  return singleQuestion;
+  question.isAnswerCorrect = function(index) {
+   return index === question.correctAnswerIndex
+  };
+  return question;
 }
+
+const firstQuestion = createQuestion("Where is the capital of Jordan?", ["Tashkent", "Amaan", "Kuwait City", "Nairobi"], 1);
+
+const secondQuestion = createQuestion("What is the capital of the UK?", ["London", "Perth", "Cheshire"], 1)
 
 // Convert the function the 'this keyword':
 
-function createQuestion(title, options) {
-  let singleQuestion = {};
-  this.title = title;
-  this.options = options;
-  this.getCorrectAnswer = function() {
-    return this.options[correctAnswerIndex];
+function createQuestion(title, options, correctAnswerIndex) {
+  let question = {};
+  question.title = title;
+  question.options = options;
+  question.correctAnswerIndex = correctAnswerIndex;
+  question.getCorrectAnswer = function() {
+    return this.options[this.correctAnswerIndex];
   };
- this.isAnswerCorrect = function(num) {
-  if (num === correctAnswerIndex){
-    return true;
-    } else {
-    return false;
-    }
- }
-  return singleQuestion;
+  question.isAnswerCorrect = function(index) {
+   return index === this.correctAnswerIndex
+  };
+  return question;
 }
 
 ```
