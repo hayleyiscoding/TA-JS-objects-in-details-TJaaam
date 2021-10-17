@@ -2,6 +2,35 @@
 
 - Create a class named `Square` which accepts one parameter `side` and will set two property `width` and `height` to the value of `side`.
 
+```js
+class Square {
+    constructor(side){
+        this.width = side;
+        this.height = side;
+    }
+    description(){
+        alert (`The square is ${width} x ${height}`)
+    }
+    calcArea(){
+        return this.width * this.height;
+    }
+    get area() {
+        return calcArea();
+    }
+    set area(area) {
+
+    }
+    static isEqual(square1, square2) {
+    return square1.width * square1.height ==== square1.width * square2.height; 
+    }
+}
+
+let square1 = new Square();
+let square2 = new Square();
+
+square.
+```
+
 - Add a method name `description` that will alert a message saying `The square is ${width} x ${height}`
 
 - Create a method inside the class named `calcArea` that will return the area of the square.
@@ -23,6 +52,26 @@
 ## User Class
 
 - Create a `User` class that accepts `firstName` and `lastName` property
+
+```js
+class User {
+    constructor(firstName, lastName){
+
+    }
+    get fullName(firstName, lastName){
+        return `${firstName} ${lastName}`;
+    }
+    set fullName(fullName){
+
+        if (fullName.length < 5) {
+            alert(`Full name should be more than 5 characters`);
+        }
+    }
+    nameContains(str){
+        return this.fullName.contains('str');
+    }
+}
+```
 
 - Create a getter method named `fullName` that will return the full name of the person.
 
