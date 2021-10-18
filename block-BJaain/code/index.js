@@ -34,7 +34,7 @@ foo(); // 'Simple Function call' and true
 (function () {
   console.log('Anonymous function invocation');
   console.log(this === window);
-})(); // 'Anonymous function invocation' and true
+})(); // 'Anonymous function invocation' and true (points to window)
 
 // ------------
 
@@ -184,8 +184,8 @@ console.log(person.print()); // Jay Pearson
 let name1 = person.print;
 let name2 = person.details;
 
-console.log(name1()); // Blank
-console.log(name2.print()); // Jay Details
+console.log(name1()); // Empty string
+console.log(name2.print()); // Error
 
 // --------
 
@@ -208,9 +208,9 @@ let object = {
   dataDouble: [1, 2, 3],
   double: function () {
     console.log('this inside of outerFn double()');
-    console.log(this);
+    console.log(this); // object
     return this.data.map(function (item) {
-      console.log(this); // Output ???
+      console.log(this); // window
       return item * 2;
     });
   },
@@ -218,13 +218,13 @@ let object = {
     console.log('this inside of outerFn doubleArrow()');
     console.log(this);
     return this.dataDouble.map((item) => {
-      console.log(this); // Output ???
+      console.log(this); // object
       return item * 2;
     });
   },
 };
 
-object.double(); // 'this inside of outerFn double()' and obj,
+object.double(); 
 object.doubleArrow();
 
 // --------------
@@ -257,7 +257,7 @@ let obj2 = {
 };
 
 let getSecondData = obj2.printSecondData.bind(obj1);
-console.log(getSecondData()); // Output and why ???
+console.log(getSecondData()); // 2
 
 // --------------
 
