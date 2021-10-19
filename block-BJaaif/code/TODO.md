@@ -12,8 +12,8 @@ Create a function that accepts two inputs (name and age) and returns an object. 
 ```js
 function makePerson(name, age)
     let obj = {};
-    this.name = name;
-    this.age = age;
+    obj.name = name;
+    obj.age = age;
     return obj;
 }
 ```
@@ -27,10 +27,12 @@ Inside `personStore` object, create a property `greet` where the value is a func
 ```js
 
 let personStore = {
-    greet: function(){
+    greet(){
         console.log("hello");
     }
 }
+
+person.greet(); // hello
 ```
 
 #### Challenge 2/3
@@ -40,8 +42,12 @@ Create a function `personFromPersonStore` that takes as input a `name` and an `a
 ```js
 function personFromPersonStore(name, age){
     let person = Object.create(personStore);
+    person.name = name;
+    person.age = age;
     return person;
 }
+
+let john = personFromPersonStore("John", 25);
 ```
 
 #### Challenge 3/3
@@ -49,16 +55,13 @@ function personFromPersonStore(name, age){
 Without editing the code you've already written, add an `introduce` method to the `personStore` object that logs "Hi, my name is [name]".
 
 ```js
-let personStore = {
-    greet: function(){
-        console.log("hello");
-    }
-    introduce: function(){
-        console.log(`Hi, my name is ${this.name}`);
+personStore.introduce = function(){
+    console.log(`Hi, my name is ${this.name}`);
     }
 }
-```
 
+john.introduce(); // `Hi, my name is John`
+```
 
 ## Using the NEW keyword
 
@@ -72,6 +75,9 @@ function PersonConstructor(){
         console.log("hello");
     };
 }
+
+let John = new PersonConstructor();
+john.greet(); // hello
 ```
 
 #### Challenge 2/3
@@ -80,10 +86,16 @@ Create a function `personFromConstructor` that takes as input a `name` and an `a
 
 ```js
 function PersonfromConstructor(name, age){
-    this.greet = function(){
-        console.log("hello");
-    };
+    let obj = new PersonConstructor();
+    obj.name = name;
+    obj.age = age;
+    return obj;
 }
+
+let sara = PersonFromConstructor('sara', 12);
+console.log(sara.name); // sara
+console.log(sara.age); 12
+sara.greet(); // hello
 ```
 
 #### Challenge 3/3
@@ -99,6 +111,8 @@ function PersonConstructor(){
         console.log(`Hi, my name is ${this.name}`);
     };
 }
+
+sara.introduce(); // Hi, my name is sara
 ```
 
 ## Using ES6 Classes
@@ -116,6 +130,9 @@ class PersonClass {
         console.log(`Hello`);
     }
 }
+
+let george = new PersonClass();
+george.greet(); // Hello
 ```
 
 #### Challenge 2/2
@@ -124,13 +141,17 @@ Create a class `DeveloperClass` that creates objects by extending the `PersonCla
 
 ```js
 class DeveloperClass extends PersonClass {
-    constructor(name, introduce){
+    constructor(name){
         super(name);
     }
     introduce(){
         console.log(`Hello World, my name is ${this.name}`);
     }
 }
+
+let thai = new DeveloperClass("thai", 32);
+thai.name; // Thai
+thai.introduce(); // Hello World, my name is Thai
 ```
 
 ## Subclassing
@@ -140,18 +161,42 @@ class DeveloperClass extends PersonClass {
 Create an object `adminFunctionStore` that has access to all methods in the `userFunctionStore` object, without copying them over individually.
 
 ```js
-class AdminFunctionStore extends userFunctionStore{
-    constructor(){
-        super()
-    }
+let userFunctionStore = {
+    sayType: function(){
+        console.log(`I am a ` + this.type);
+    };
 }
+
+function userFactory(name, score){
+    let user = Object.create(userFunctionStore);
+    user.type = "User";
+    user.name = name;
+    user.score = score;
+    return user;
+}
+
+let adminFunctionStore = Object.create(userFunctionStore)
+
+function adminFactory(name, score){
+    let obj = adminFactory(name, score);
+    Object.setPrototypeOf(obj, adminFunctionStore)
+    obj.type = "Admin";
+    return obj;
+}
+
+adminFunctionStore.sharePublicMessage = function(){
+    console.log('Welcome user');
+}
+
+let adminFromFactory = adminFactory("Eva", 5);
+
+adminFromFactory.sayType(); // I am a Admin
+adminFromFactory.sharePublicMessage() // Welcome user
 ```
 
 #### Challenge 2/5
 
 Create an `adminFactory` function that creates an object with all the same data fields (and default values) as objects of the `userFactory` class, but without copying each data field individually.
-
-
 
 #### Challenge 3/5
 
