@@ -17,6 +17,75 @@ Methods
 
 - `summary()` - returns `I live in ${location} and I have ${numberOfLegs}`
 
+```js
+
+let animalMethods = {
+    eat(){
+    `I live in ${this.location} and I can eat`
+    },
+    changeLocation(newLocation){
+    return this.location = newLocation;
+    },
+    summary(){
+        return `I live in ${this.location} and I have ${this.numberOfLegs}`
+    }
+}
+
+let dogMethods = {
+    bark(){
+        alert (`I am ${this.name} and I can bark 🐶`)
+    }
+    changeName(newName){
+        return this.name = newName;
+    }
+    changeColor(newColor){
+        return this.color = newColor;
+    }
+    summary(){
+        return `I am ${this.name} and I am of ${this.color} color. I can also bark`
+    }
+}
+
+let catMethods = {
+    meow(){
+        alert (`I am ${this.name} and I can do mewo meow 😹`);
+    }
+    changeName(newName){
+        this.name = newName;
+    }
+    changeColorOfEyes(newColor){
+        this.color = newColor;
+    }
+    summary(){
+        return `I am ${thisname} and the color of my eyes are ${this.colorOfEyes}. I can also do meow meow`
+    }
+}
+
+function createAnimal(location, noOfLegs){
+    let animal = Object.create(animalMethods);
+    animal.location = this.location;
+    animal.noOfLegs = this.noOfLegs;
+    return animal;
+}
+
+function createDog(name, color){
+    let dog = Object.create(animalMethods);
+    dog.name = this.name;
+   dog.color = this.color;
+   dog._proto_ = dogMethods;
+    return dog;
+}
+function createCat(name, colorOfEyes){
+    let cat = Object.create(animalMethods);
+    cat.name = this.name;
+  cat.colorOfEyes = this.colorOfEyes;
+  cat._proto_ = catMethods;
+    return cat;
+}
+
+
+```
+
 #### Dog
 
 It will have all the properties and methods of the Animal. These are the extra properties and methods these dogs will have.
