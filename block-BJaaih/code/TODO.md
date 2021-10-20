@@ -2,6 +2,15 @@ In this assignment you have to add methods to the `prototype` of Array. Array is
 
 1. Create a function named `myMap` and add the method to `Array.prototype`. `myMap` will behave similar to how the `Array.map` works. To test the implementation use the code below.
 
+```js
+
+array.prototype = {
+    myMap(){
+
+    }
+}
+```
+
 **You should know once you add an extra method to Array.prototype and refresh the page. The method you added will be gone.**
 
 2. Add a method named `myFilter` to Array.prototype. myFilter should behave similar to Array.filter. After adding the function test it using the code below.
