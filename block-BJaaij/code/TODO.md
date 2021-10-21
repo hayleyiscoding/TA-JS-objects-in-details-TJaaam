@@ -33,23 +33,29 @@ After creating the Book and BookList class create 5 book object and add it to li
 ```js
 class BookList {
     constructor(){
-        this.BookList = [];
+        this.books = [];
+        this.currentIndexBook = 0;
     }
-    add(book){
-        this.BookList.push(book);
-        return BookList;
+    add(books = []){
+        this.books = this.books.concat(books);
+        return books;
     }
-    getCurrentBook(index){
-        return this.BookList[index];
+    getCurrentBook(){
+        return this.books[this.currentIndexBook];
     }
-    getNextBook(index){
-        return this.BookList[index + 1];
+    getNextBook(){
+        return this.books[this.currentIndexBook + 1];
     }
-    getPrevBook(index){
-     return this.BookList[index - 1];
+    // OR getNextBook(){
+    //    this.currentIndexBook = currentIndexBook + 1
+    //    return this.books[this.currentIndexBook];
+    //}
+    getPrevBook(){
+     return this.books[this.currentIndexBook - 1];
     }
     changeCurrentBook(index){
-        return this.BookList[index];
+        return this.currentIndexBook = index;
+        return this.currentIndexBook;
     }
 }
 
@@ -60,18 +66,35 @@ class BookList {
 // - [] `changeCurrentBook` should accept one parameter and update the current index.
 
 class Book {
-    constructor(){
+    constructor(title, category,author){
         this.title = title;
         this.category = category;
         this.author = author;
         this.isRead = false;
-        this.finishedDate = finishedDate;
+        this.finishedDate = null;
     }
-    markBookAsRead(answer){
-        if (answer === 'yes') {
+    markBookAsRead(){
           this.isRead = true;
           this.finishedDate = Date.now();
-         }
-        return this.isRead || this.finishedDate
     }
 }
+
+let book1 = new Book("To Kill a Mockingbird", "Pride and prejusdice")
+
+let book2 = new Book("House", "Harry Potter", "Gone");
+
+let library = new BookList();
+
+libary.add([book1,book2]);
+
+library.changeCurrentBook(1);
+library.getNextBook();
+
+book1.markBookAsRead();
+
+// Then:
+
+book1.isRead = true;
+
+library.getCurrentBook().markAsRead();
+```
