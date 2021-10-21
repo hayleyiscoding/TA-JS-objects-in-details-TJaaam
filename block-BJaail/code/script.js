@@ -67,8 +67,6 @@ class Book {
     td4.append(input);
     tr.append(td1, td2, td3, td4, td5);
     table.append(tr);
-
-    console.log("called in createUI book");
     return tr;
   }
 }
