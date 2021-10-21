@@ -10,10 +10,9 @@ Queue
 
 1. Create a class name `Stack` with the following data and methods. Also implement a `length` getter method.
 
+
 Data:
-
 - `stack`
-
 Methods:
 
 - `push`: will accept a value and add to the stack. Stack adds data at the end
@@ -30,6 +29,34 @@ Getter
 #### Test
 
 ```js
+
+class Stack {
+    constructor(){
+        this stack = stack;
+    }
+    get length(){
+
+    }
+    push(value){
+
+    }
+    pop(){
+        return 
+    }
+    peek(){
+
+    }
+    reverse(){
+
+    }
+    isEmpty(){
+
+    }
+    displayStack(){
+
+    }
+}
+
 let myStack = new Stack();
 myStack.push('One');
 myStack.push('Two');
@@ -67,6 +94,20 @@ Getter
 #### Test
 
 ```js
+
+class Queue {
+    constructor(){
+        this.queue = queue;
+    }
+    enqueue(item){
+        
+    }
+    dequeue(){}
+    peek(){}
+    isEmpty(){}
+    displayQueue(){}
+}
+
 let atmQueue = new Queue();
 atmQueue.enqueue('Aman');
 atmQueue.enqueue('John');
