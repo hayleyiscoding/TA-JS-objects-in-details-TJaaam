@@ -142,9 +142,7 @@ class Quiz {
 
 let button = document.querySelector("button");
 
-function handleClick(event) {
-  event.preventDefault();
-  nextQuestion();
-}
-
-button.addEventListener("click", handleClick);
+button.addEventListener("click", (event) => {
+    event.preventDefault();
+    nextQuestion();
+});
