@@ -29,3 +29,49 @@ Book class will have the following methods:
 - [] `changeCurrentBook` should accept one parameter and update the current index.
 
 After creating the Book and BookList class create 5 book object and add it to list. Test all the methods in Book and BookList class.
+
+```js
+class BookList {
+    constructor(){
+        this.BookList = [];
+    }
+    add(book){
+        this.BookList.push(book);
+        return BookList;
+    }
+    getCurrentBook(index){
+        return this.BookList[index];
+    }
+    getNextBook(index){
+        return this.BookList[index + 1];
+    }
+    getPrevBook(index){
+     return this.BookList[index - 1];
+    }
+    changeCurrentBook(index){
+        return this.BookList[index];
+    }
+}
+
+// - [] `add([Book])` will accept an array (list of books). Once the method is called the book will added to the list.
+// - [] `getCurrentBook()` should return the current book using the `index` and the book array
+// - [] `getNextBook()` should return the next book using the `index` and the book array
+// - [] `getPrevBook()` should return the previous book using the `index` and the book array
+// - [] `changeCurrentBook` should accept one parameter and update the current index.
+
+class Book {
+    constructor(){
+        this.title = title;
+        this.category = category;
+        this.author = author;
+        this.isRead = false;
+        this.finishedDate = finishedDate;
+    }
+    markBookAsRead(answer){
+        if (answer === 'yes') {
+          this.isRead = true;
+          this.finishedDate = Date.now();
+         }
+        return this.isRead || this.finishedDate
+    }
+}
