@@ -28,7 +28,9 @@ let quizCollection = [
 
 let form = document.querySelector("form");
 let root = document.querySelector("ul");
-let button = document.querySelector("button");
+let button = document.querySelector(".next");
+let button2 = document.querySelector(".prev");
+let totalQuestions = document.querySelector(".total");
 
 class Question {
   constructor(title, options, correctAnswerIndex) {
@@ -62,6 +64,16 @@ class Quiz {
     this.activeIndex = this.activeIndex + 1;
     this.createUI();
   }
+  handleButtons(button,btn2) {
+    if (this.activeIndex === 0) {
+      btn2.style.display = "none";
+    } else if (this.activeIndex === this.questions.length - 1) {
+      button.style.display = "none";
+    } else {
+        btn2.style.display = "inline-block";
+        button.style.display = "inline-block";
+    }
+  }
   createUI() {
     root.innerHTML = "";
     //      <li>
@@ -72,6 +84,7 @@ class Quiz {
     //     <label for="option2">Madrid</label>
     //     <input type="radio" class="option3" name="question" value="option3" />
     //     <label for="option3">Seville</label>
+    //     <button><<< Previous Question</button>
     //     <button>Next Question >>></button>
     //   </li>
     let activeQuestion = this.questions[this.activeIndex];
@@ -103,10 +116,29 @@ class Quiz {
     let label3 = document.createElement("label");
     label3.for = "option1";
     label3.innerText = activeQuestion.options[2];
+    let br = document.createElement("br");
     let button = document.createElement("button");
     button.innerText = "Next Question >>>";
+    button.classList.add("next");
+    let button2 = document.createElement("button");
+    button2.classList.add("prev");
+    button2.innerText = "<<< Previous Question";
     button.addEventListener("click", quiz.nextQuestion.bind(quiz));
-    li.append(p, input1, label1, input2, label2, input3, label3, button);
+    button2.addEventListener("click", quiz.prevQuestion.bind(quiz));
+    totalQuestions.innerText = `Total Questions: ${this.questions.length}`;
+    this.handleButtons(button,button2);
+    li.append(
+      p,
+      input1,
+      label1,
+      input2,
+      label2,
+      input3,
+      label3,
+      br,
+      button2,
+      button
+    );
     root.append(li);
   }
 }
@@ -121,6 +153,3 @@ quizCollection.forEach((question) => {
   );
 });
 quiz.createUI();
-
-// button.addEventListener("click", quiz.nextQuestion.bind(quiz));
-// prev.addEventListener("click", quiz.prevQuestion.bind(quiz));

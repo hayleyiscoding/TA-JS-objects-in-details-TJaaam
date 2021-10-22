@@ -5,7 +5,7 @@
     <!-- Responsive Design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- CSS -->
-    <!-- <link rel="stylesheet" href="stylesheets/style.css" /> -->
+    <link rel="stylesheet" href="./style.css" />
     <!-- Font Family -->
 
     <!-- Font Awesome Kit -->
@@ -17,7 +17,8 @@
   </head>
   <body>
     <header class="container">
-      <h1>Quiz time!</h1>
+      <h1>Quiz Time</h1>
+      <p class="total"></p>
     </header>
     <main>
       <div class="container">
@@ -25,13 +26,28 @@
           <ul>
             <li>
               <p>What's the capital of Spain?</p>
-              <input type="radio" class="option1" name="question" value="option1" />
+              <input
+                type="radio"
+                class="option1"
+                name="question"
+                value="option1"
+              />
               <label for="option1">Barcelona</label>
-              <input type="radio" class="option2" name="question" value="option2" />
+              <input
+                type="radio"
+                class="option2"
+                name="question"
+                value="option2"
+              />
               <label for="option2">Madrid</label>
-              <input type="radio" class="option3" name="question" value="option3" />
+              <input
+                type="radio"
+                class="option3"
+                name="question"
+                value="option3"
+              />
               <label for="option3">Seville</label>
-              <button>Next Question >>></button>
+              <!-- <button>Next Question >>></button> -->
             </li>
           </ul>
         </form>
