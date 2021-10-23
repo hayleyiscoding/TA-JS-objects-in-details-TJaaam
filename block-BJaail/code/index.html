@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Responsive Design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="stylesheets/main.css" />
+    <!-- Font Family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome Kit -->
+    <script
+      src="https://kit.fontawesome.com/f1a9dfe756.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Responsive - Assignment 2</title>
+  </head>
+  <body>
+    <header class="container flex">
+      <h1 class="text-center">
+        <i class="fas fa-book-open"></i>My<strong>Book</strong>List
+      </h1>
+    </header>
+    <main>
+      <div class="container">
+        <label for="title">Title</label>
+        <input type="text" class="title" />
+        <label for="author">Author</label>
+        <input type="text" class="author" />
+        <label for="isbn">ISBN#</label>
+        <input type="text" class="isbn" />
+        <button class="btn">Add Book</button>
+      </div>
+      <div class="container">
+        <table class="books">
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th class="center">Read?</th>
+            <th></th>
+          </tr>
+          <tbody class="book-list"></tbody>
+        </table>
+      </div>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
