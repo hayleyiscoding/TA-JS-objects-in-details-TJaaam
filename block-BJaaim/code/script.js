@@ -39,7 +39,7 @@ class Question {
     this.correctAnswerIndex = correctAnswerIndex;
   }
   isCorrect(answer) {
-    return answer === this.options[this.correctAnswerIndex];
+    return answer == this.correctAnswerIndex;
   }
   getCorrectAnswer() {
     return this.options[this.correctAnswerIndex];
@@ -47,10 +47,17 @@ class Question {
 }
 
 class Quiz {
-  constructor(questions = [], score = 0) {
+  constructor(questions = [], score = {}) {
     this.questions = questions;
     this.score = score;
     this.activeIndex = 0;
+  }
+  incrementScore(correct) {
+    if (correct) {
+      this.score[this.activeIndex] = true;
+    } else {
+      this.score[this.activeIndex] = false;
+    }
   }
   addQuestion(title, options, correctAnswerIndex) {
     let question = new Question(title, options, correctAnswerIndex);
@@ -64,14 +71,15 @@ class Quiz {
     this.activeIndex = this.activeIndex + 1;
     this.createUI();
   }
-  handleButtons(button,btn2) {
+  handleButtons(button, btn2, button3) {
     if (this.activeIndex === 0) {
       btn2.style.display = "none";
     } else if (this.activeIndex === this.questions.length - 1) {
       button.style.display = "none";
+      button3.style.display = "inline-block";
     } else {
-        btn2.style.display = "inline-block";
-        button.style.display = "inline-block";
+      btn2.style.display = "inline-block";
+      button.style.display = "inline-block";
     }
   }
   createUI() {
@@ -88,34 +96,29 @@ class Quiz {
     //     <button>Next Question >>></button>
     //   </li>
     let activeQuestion = this.questions[this.activeIndex];
-    console.log(activeQuestion);
     let li = document.createElement("li");
+    let options = document.createElement("div");
     let p = document.createElement("p");
     p.innerText = activeQuestion.title;
-    let input1 = document.createElement("input");
-    input1.type = "radio";
-    input1.classList.add("option1");
-    input1.value = "option1";
-    input1.name = "question";
-    let label1 = document.createElement("label");
-    label1.for = "option1";
-    label1.innerText = activeQuestion.options[0];
-    let input2 = document.createElement("input");
-    input2.type = "radio";
-    input2.classList.add("option2");
-    input2.value = "option2";
-    input2.name = "question";
-    let label2 = document.createElement("label");
-    label2.for = "option2";
-    label2.innerText = activeQuestion.options[1];
-    let input3 = document.createElement("input");
-    input3.classList.add("option3");
-    input3.value = "option3";
-    input3.name = "question";
-    input3.type = "radio";
-    let label3 = document.createElement("label");
-    label3.for = "option1";
-    label3.innerText = activeQuestion.options[2];
+
+    activeQuestion.options.forEach((option, index) => {
+      let input1 = document.createElement("input");
+      input1.type = "radio";
+      input1.classList.add(`option${index}`);
+      input1.value = index;
+      input1.id = index;
+      input1.name = "question";
+      let label1 = document.createElement("label");
+      label1.for = index;
+      label1.innerText = option;
+
+      input1.addEventListener("change", (event) => {
+        event.preventDefault();
+        this.incrementScore(activeQuestion.isCorrect(event.target.value));
+      });
+      options.append(input1, label1);
+    });
+
     let br = document.createElement("br");
     let button = document.createElement("button");
     button.innerText = "Next Question >>>";
@@ -125,20 +128,26 @@ class Quiz {
     button2.innerText = "<<< Previous Question";
     button.addEventListener("click", quiz.nextQuestion.bind(quiz));
     button2.addEventListener("click", quiz.prevQuestion.bind(quiz));
+
+    let button3 = document.createElement("button");
+    button3.innerText = "Get Result";
+    button3.classList.add("btn3");
+    button3.style.display = "none";
+
+    button3.addEventListener("click", () => {
+      let score = Object.values(this.score).filter((a) => a === true).length;
+      if (score === 5) {
+        alert(`You got ${score} out of 5! Congrats! 🥳`);
+      } else if (score === 0) {
+        alert(`You got ${score} out of 5 😭 Better luck next time!`);
+      } else {
+        alert(`Your score is ${score} out of 5!`);
+      }
+    });
+
     totalQuestions.innerText = `Total Questions: ${this.questions.length}`;
-    this.handleButtons(button,button2);
-    li.append(
-      p,
-      input1,
-      label1,
-      input2,
-      label2,
-      input3,
-      label3,
-      br,
-      button2,
-      button
-    );
+    this.handleButtons(button, button2, button3);
+    li.append(p, options, br, button2, button, button3);
     root.append(li);
   }
 }
